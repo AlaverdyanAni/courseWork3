@@ -33,7 +33,7 @@ public class StudentContoller {
     public ResponseEntity<Student> updateStudent(@RequestBody Student student){
         Student updatedStudent=studentService.updateStudent(student);
         if (updatedStudent==null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(updatedStudent);
 
@@ -48,8 +48,11 @@ public class StudentContoller {
     public ResponseEntity<List<Student>> getStudents(){
         return ResponseEntity.ok(studentService.getStudents());
     }
-    @GetMapping("{age}")
-    public ResponseEntity<List<Student>> getStudnentsByAge(@PathVariable Integer age){
+    @GetMapping
+    public ResponseEntity<List<Student>> getStudnentsByAge(@RequestParam Integer age){
+        if (age<7||age>60){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
     }
 

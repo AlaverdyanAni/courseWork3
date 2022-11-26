@@ -5,11 +5,12 @@ import ru.hogwarts.school.model.Student;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private final HashMap<Long, Student> students=new HashMap<>();
+    private final Map<Long, Student> students=new HashMap<>();
     private long lastId=0;
 
     public Student createStudent(Student student){
